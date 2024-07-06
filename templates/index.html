@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BookBuddy</title>
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .coming-soon{
+            height: 100px;
+            color: white;
+            background-color: black;
+            margin: 20px;
+            margin-top: 50px;
+            margin-left: 0;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .navbar-brand img {
+            height: 30px;
+            margin-left: 60px;
+        }
+        .nav-item {
+            font-size: 18px;
+            margin-right: 25px;
+        }
+        .card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card-img-container {
+            padding: 15px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+        }
+        .card-img-top {
+            height: 330px;
+            object-fit: cover;
+        }
+        .card-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .secondary-navbar {
+            background-color: black;
+            padding: 10px 0;
+            margin-top: 50px;
+        }
+        .secondary-navbar .nav-link {
+            color: black;
+            background-color: white;
+        }
+        .secondary-navbar .nav-link.active {
+            font-weight: bold;
+            color: black;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body style="background-color:black">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-4">
+        <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='images/book-logo.png') }}" alt="Logo">
+        </a>
+        <a class="navbar-brand" href="#" style="font-size: 25px">BookBuddy</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/recommend">Recommend</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="secondary-navbar">
+        <div class="container">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#top-50-books" data-toggle="tab">Top 50 Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#top-romance-books" data-toggle="tab">Top Romance Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#top-biography-books" data-toggle="tab">Top Biography Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#top-fiction-books" data-toggle="tab">Top Fiction Books</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="top-50-books">
+                <h1 class="text-white" style="font-size:50px;margin-top: 30px">Top <span style="color: yellow">50</span> Books</h1>
+                <div class="row">
+                    {% for i in range(book_name|length) %}
+                    <div class="col-md-3" style="margin-top:50px; margin-bottom: 50px">
+                        <div class="card">
+                            <div class="card-img-container">
+                                <img class="card-img-top" src="{{ image[i] }}" alt="Book Image">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="text-black">{{ book_name[i] }}</h5>
+                                <h6 class="text-black">{{ author[i] }}</h6>
+                                <h6 class="text-black">Votes - {{ votes[i] }}</h6>
+                                <h6 class="text-black">Rating - {{ rating[i] }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="top-romance-books">
+                <h1 class="text-white" style="font-size:50px;margin-top: 30px">Top <span style="color: yellow">Romance</span> Books</h1>
+                <div  class="coming-soon">
+                    <h4>Coming soon...</h4>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="top-biography-books">
+                <h1 class="text-white" style="font-size:50px;margin-top: 30px">Top <span style="color: yellow">Biography</span> Books</h1>
+                <div class="coming-soon">
+                    <h4>Coming soon...</h4>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="top-fiction-books">
+                <h1 class="text-white" style="font-size:50px;margin-top: 30px">Top <span style="color: yellow">Fiction</span> Books</h1>
+                <div class="coming-soon">
+                    <h4>Coming soon...</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-light text-dark text-center py-4" style="margin-top: 50px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About Us</h5>
+                    <p>BookBuddy is your ultimate book recommendation platform. Discover your next great read with us!</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/" class="text-dark">Home</a></li>
+                        <li><a href="/recommend" class="text-dark">Recommend</a></li>
+                        <li><a href="/contact" class="text-dark">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: contact@bookbuddy.com</p>
+                    <p>Phone: +1 (234) 567-8901</p>
+                    <p>Address: 123 Book Street, Bibliophile City, 45678</p>
+                </div>
+            </div>
+            <hr>
+            <p class="mb-0">&copy; 2024 BookBuddy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
